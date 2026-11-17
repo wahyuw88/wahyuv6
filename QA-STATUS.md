@@ -1,28 +1,28 @@
-# Status QA — Wahyu Personal Website
+# Status QA — Wahyu Personal Website v1.6.0
 
-Tanggal pemeriksaan: 17 November 2026
+## Perubahan pada branch `qa/final-polish-v7`
+- Upgrade Next.js dan eslint-config-next ke 15.5.29.
+- Upgrade React dan React DOM ke 19.1.8.
+- Migrasi dari `framer-motion` lama ke paket Motion dengan import `motion/react`.
+- Dependensi langsung dipatok pada versi eksplisit; runtime Node.js minimum 20.9.0.
+- Menambahkan lockfile npm, `.gitignore`, dan `.env.example`.
+- `metadataBase` tidak memakai host placeholder; canonical aktif saat URL publik dikonfigurasi.
+- Logika tema membaca `data-theme` awal sebelum menyelaraskan state React.
+- Navigasi mobile mendukung Escape dan fokus keyboard.
+- Metadata Open Graph, sitemap, robots, dan favicon dipertahankan.
+- GitHub Actions memakai `npm ci` dari lockfile yang dikomit, kemudian menjalankan ESLint dan production build.
 
-## Pemeriksaan yang berhasil
-- Arsip sumber versi 5.0 berhasil diekstrak dan struktur proyek diperiksa.
-- `node --check` berhasil untuk `lib/site-url.js`, `app/sitemap.js`, dan `app/robots.js`.
-- Helper URL diuji untuk kondisi tanpa konfigurasi, URL valid dengan trailing slash, dan URL tidak valid.
-- Pemeriksaan struktur navigasi, target anchor, metadata, sitemap, robots, dan konfigurasi tema dilakukan secara statis.
-- Perbaikan aksesibilitas: skip link ke konten, fokus keyboard yang terlihat, dan pengembalian fokus saat menu mobile ditutup.
-- Helper URL publik dipusatkan dan dibuat tahan terhadap nilai environment variable yang tidak valid.
-- Aturan reduced-motion CSS digabungkan dan disempurnakan.
+## Hasil verifikasi
+- Run CI pertama: ESLint lulus, build gagal karena ketidakcocokan Framer Motion lama dengan `motion-dom`.
+- Setelah upgrade Next.js, React, dan Motion: instalasi dependensi, ESLint, dan `next build` lulus pada CI.
+- Lockfile yang dihasilkan dari instalasi sukses sudah dikomit ke branch PR.
+- CI disederhanakan menjadi read-only dan akan menjalankan ulang seluruh pemeriksaan langsung dari lockfile permanen.
 
-## Belum dapat diverifikasi
-- `npm install` tidak selesai karena koneksi ke registry dependensi mengalami timeout.
-- `npm run lint` tidak dapat dijalankan: executable `eslint` belum tersedia karena dependensi belum terpasang.
-- `npm run build` tidak dapat dijalankan: executable `next` belum tersedia karena dependensi belum terpasang.
-- Pengujian browser desktop/mobile belum dapat dilakukan karena aplikasi Next.js tidak dapat dijalankan tanpa dependensi.
-- Deployment GitHub/Vercel belum dilakukan; diperlukan repository tujuan dan akses akun pengguna.
+## Belum diverifikasi
+- CI terbaru menggunakan lockfile permanen.
+- Preview Vercel berstatus Ready.
+- Pengujian browser visual desktop/mobile dan Lighthouse.
+- Domain publik final untuk `NEXT_PUBLIC_SITE_URL`.
+- Deployment produksi.
 
-## Langkah untuk menyelesaikan QA di komputer lokal
-1. Jalankan `npm install` hingga selesai; commit `package-lock.json` yang dihasilkan.
-2. Jalankan `npm run lint` dan perbaiki semua temuan.
-3. Jalankan `npm run build` sampai berhasil.
-4. Jalankan `npm run start`, lalu uji desktop, mobile, tema, menu keyboard, dan metadata.
-5. Isi `NEXT_PUBLIC_SITE_URL` dengan domain final sebelum deployment produksi.
-
-Status: **perbaikan statis selesai; QA produksi belum lulus**.
+Status: build telah berhasil menggunakan dependency lock yang sama; menunggu run terakhir pada commit dengan lockfile permanen.

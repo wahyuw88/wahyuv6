@@ -1,17 +1,6 @@
 import './globals.css';
 import { siteUrl } from '../lib/site-url';
 
-const themeScript = `(() => {
-  try {
-    const saved = localStorage.getItem('wahyu-theme');
-    const validSaved = saved === 'dark' || saved === 'light' ? saved : null;
-    const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    document.documentElement.dataset.theme = validSaved || preferred;
-  } catch {
-    document.documentElement.dataset.theme = 'light';
-  }
-})();`;
-
 export const metadata = {
   metadataBase: siteUrl ? new URL(siteUrl) : undefined,
   title: { default: 'Wahyu — Ruang Personal', template: '%s — Wahyu' },
@@ -34,5 +23,5 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  return <html lang="id" suppressHydrationWarning><head><script dangerouslySetInnerHTML={{ __html: themeScript }} /></head><body>{children}</body></html>;
+  return <html lang="id"><body>{children}</body></html>;
 }

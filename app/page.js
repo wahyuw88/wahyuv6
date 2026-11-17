@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion } from 'motion/react';
 import { ArrowDown, ArrowUpRight, Menu, Moon, Sun, X } from 'lucide-react';
 
 const nav = [['Tentang', '#tentang']];

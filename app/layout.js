@@ -13,7 +13,7 @@ const themeScript = `(() => {
 })();`;
 
 export const metadata = {
-  metadataBase: new URL(siteUrl || 'https://example.invalid'),
+  metadataBase: siteUrl ? new URL(siteUrl) : undefined,
   title: { default: 'Wahyu — Ruang Personal', template: '%s — Wahyu' },
   description: 'Ruang personal Wahyu untuk memperkenalkan diri, berbagi prinsip, dan menampilkan hal-hal yang ingin dibagikan.',
   applicationName: 'Wahyu — Ruang Personal',

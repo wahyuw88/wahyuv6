@@ -126,3 +126,49 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--gold); outline
   html { scroll-behavior: auto; }
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+
+/* Final polish: clearer interaction states, responsive rhythm, and robust mobile sizing. */
+:root { --muted: #686960; --gold: #755a32; --line: #d4d2c9; }
+html { scroll-padding-top: 90px; }
+main section[id] { scroll-margin-top: 90px; }
+.header { min-height: 76px; }
+.desktop-nav a { position: relative; padding: 10px 0; }
+.desktop-nav a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: 3px; height: 1px; background: var(--gold); transition: right .2s ease; }
+.desktop-nav a:hover::after, .desktop-nav a:focus-visible::after { right: 0; }
+.hero { min-height: min(760px, calc(100svh - 76px)); }
+.hero-main { gap: clamp(28px, 5vw, 80px); }
+.art-frame { isolation: isolate; }
+.art-frame::before { z-index: 1; }
+.art-frame::after { z-index: 1; }
+.art-monogram { letter-spacing: -9px; }
+.button-primary:focus-visible, .text-link:focus-visible, .footer-top:focus-visible { outline-offset: 5px; }
+.button-primary:active { transform: translateY(1px); }
+.contact-status { line-height: 1.5; }
+@media (min-width: 1200px) {
+  .intro-section, .principles-section, .contact-section { padding-left: max(12%, calc((100vw - 1120px) / 2)); padding-right: max(12%, calc((100vw - 1120px) / 2)); }
+}
+@media (max-width: 800px) {
+  .hero { min-height: auto; }
+  .hero-main { gap: 8px; }
+  .hero-copy { padding-top: clamp(58px, 12vw, 88px); }
+  .mobile-menu[open] .mobile-nav { animation: menu-in .16s ease-out both; }
+  .mobile-nav { right: -6vw; }
+  .art-index { right: 0; }
+  .intro-grid h2, .principles-heading h2, .contact-content h2 { letter-spacing: -2.5px; }
+}
+@media (max-width: 420px) {
+  .hero-topline, .hero-bottom { font-size: 7px; }
+  .hero-bottom { gap: 10px; }
+  .scroll-line { width: 38px; }
+  .art-index { font-size: 7px; }
+  .contact-status { font-size: 8px; }
+}
+@keyframes menu-in {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu[open] .mobile-nav { animation: none; }
+  .desktop-nav a::after { transition: none; }
+}

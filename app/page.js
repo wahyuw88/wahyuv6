@@ -101,8 +101,8 @@ export default function Home() {
         <a className="wordmark" href="#beranda" aria-label="Kembali ke beranda">WAHYU<span>.</span></a><span>RUANG PERSONAL.</span>
         <a className="footer-top" href="#beranda">KEMBALI KE ATAS <ArrowUpRight size={13} aria-hidden="true" /></a>
         <div className="footer-bottom"><span>© {new Date().getFullYear()} WAHYU.</span><span>DIBUAT DENGAN SEDERHANA.</span></div>
-      </main>
       </footer>
+      </main>
     </>
   );
 }

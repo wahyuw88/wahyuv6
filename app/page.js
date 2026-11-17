@@ -45,13 +45,13 @@ export default function Home() {
   const toggleTheme = () => setTheme((current) => (current || 'light') === 'dark' ? 'light' : 'dark');
 
   return (
-    <main id="konten">
-      <a className="skip-link" href="#beranda">Lewati ke konten utama</a>
+    <>
+      <a className="skip-link" href="#konten">Lewati ke konten utama</a>
       <header className="header">
         <a className="wordmark" href="#beranda" aria-label="Wahyu, kembali ke beranda">WAHYU<span>.</span></a>
         <nav className="desktop-nav" aria-label="Navigasi utama">{nav.map(([label, href]) => <a key={label} href={href}>{label}</a>)}</nav>
         <div className="header-actions">
-          <button className="theme-toggle" type="button" onClick={toggleTheme} aria-label={activeTheme === 'dark' ? 'Aktifkan mode terang' : 'Aktifkan mode gelap'} title={activeTheme === 'dark' ? 'Mode terang' : 'Mode gelap'}>
+          <button className="theme-toggle" type="button" onClick={toggleTheme} aria-label={activeTheme === 'dark' ? 'Aktifkan mode terang' : 'Aktifkan mode gelap'} aria-pressed={activeTheme === 'dark'} title={activeTheme === 'dark' ? 'Mode terang' : 'Mode gelap'}>
             {activeTheme === 'dark' ? <Sun size={17} aria-hidden="true" /> : <Moon size={17} aria-hidden="true" />}<span>{activeTheme === 'dark' ? 'Terang' : 'Gelap'}</span>
           </button>
         </div>
@@ -63,6 +63,7 @@ export default function Home() {
         {nav.map(([label, href]) => <a key={label} href={href} onClick={() => setMenuOpen(false)}>{label}<ArrowUpRight size={17} aria-hidden="true" /></a>)}
         <button className="mobile-theme" type="button" onClick={toggleTheme}>{activeTheme === 'dark' ? <Sun size={16} aria-hidden="true" /> : <Moon size={16} aria-hidden="true" />}Ganti ke mode {activeTheme === 'dark' ? 'terang' : 'gelap'}</button>
       </nav>
+      <main id="konten">
       <section className="hero" id="beranda" aria-labelledby="hero-title">
         <div className="hero-topline"><span>SEBUAH RUANG PERSONAL</span><span>INDONESIA</span></div>
         <div className="hero-main">
@@ -101,6 +102,7 @@ export default function Home() {
         <a className="footer-top" href="#beranda">KEMBALI KE ATAS <ArrowUpRight size={13} aria-hidden="true" /></a>
         <div className="footer-bottom"><span>© {new Date().getFullYear()} WAHYU.</span><span>DIBUAT DENGAN SEDERHANA.</span></div>
       </footer>
-    </main>
+      </main>
+    </>
   );
 }

@@ -6,7 +6,7 @@ Website pribadi berbahasa Indonesia dengan pendekatan premium minimalist. Konten
 - Next.js 15 (App Router)
 - React 19
 - JavaScript
-- Framer Motion
+- Motion (animasi)
 - Lucide React
 
 ## Menjalankan lokal
@@ -30,6 +30,8 @@ Salin .env.example menjadi .env.local dan isi NEXT_PUBLIC_SITE_URL dengan URL do
 1. Import repository GitHub ke Vercel.
 2. Framework: Next.js.
 3. Atur NEXT_PUBLIC_SITE_URL setelah domain final ditentukan.
-4. Deploy, lalu uji desktop, mobile, tema, keyboard, dan metadata sharing.
+4. Deploy, lalu uji pada lebar 320 px, 375 px, 768 px, dan desktop.
+5. Uji navigasi keyboard (Tab, Shift+Tab, Enter, Escape), tombol tema, preferensi tema, dan reduced motion.
+6. Periksa metadata sharing, sitemap, robots, serta halaman 404.
 
 Tidak ada database atau login. Bagian Karya tidak ditampilkan sebelum ada proyek nyata.

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
-import { ArrowDown, ArrowUpRight, Menu, Moon, Sun, X } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, Menu, X } from 'lucide-react';
 
 const nav = [['Tentang', '#tentang']];
 
@@ -13,20 +13,8 @@ function Reveal({ children, className = '', delay = 0 }) {
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [theme, setTheme] = useState(null);
   const menuButtonRef = useRef(null);
   const reduceMotion = useReducedMotion();
-
-  useEffect(() => {
-    const current = document.documentElement.dataset.theme;
-    setTheme(current === 'dark' ? 'dark' : 'light');
-  }, []);
-
-  useEffect(() => {
-    if (!theme) return;
-    document.documentElement.dataset.theme = theme;
-    try { localStorage.setItem('wahyu-theme', theme); } catch { /* Penyimpanan dapat dibatasi browser. */ }
-  }, [theme]);
 
   useEffect(() => {
     if (!menuOpen) return undefined;
@@ -41,27 +29,18 @@ export default function Home() {
     return () => window.removeEventListener('keydown', closeOnEscape);
   }, [menuOpen]);
 
-  const activeTheme = theme || 'light';
-  const toggleTheme = () => setTheme((current) => (current || 'light') === 'dark' ? 'light' : 'dark');
-
   return (
     <>
       <a className="skip-link" href="#konten">Lewati ke konten utama</a>
       <header className="header">
         <a className="wordmark" href="#beranda" aria-label="Wahyu, kembali ke beranda">WAHYU<span>.</span></a>
         <nav className="desktop-nav" aria-label="Navigasi utama">{nav.map(([label, href]) => <a key={label} href={href}>{label}</a>)}</nav>
-        <div className="header-actions">
-          <button className="theme-toggle" type="button" onClick={toggleTheme} aria-label={activeTheme === 'dark' ? 'Aktifkan mode terang' : 'Aktifkan mode gelap'} aria-pressed={activeTheme === 'dark'} title={activeTheme === 'dark' ? 'Mode terang' : 'Mode gelap'}>
-            {activeTheme === 'dark' ? <Sun size={17} aria-hidden="true" /> : <Moon size={17} aria-hidden="true" />}<span>{activeTheme === 'dark' ? 'Terang' : 'Gelap'}</span>
-          </button>
-        </div>
         <button ref={menuButtonRef} className="menu-toggle" type="button" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? 'Tutup navigasi' : 'Buka navigasi'} aria-expanded={menuOpen} aria-controls="mobile-navigation">
           {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
         </button>
       </header>
       <nav id="mobile-navigation" className="mobile-nav" aria-label="Navigasi mobile" hidden={!menuOpen}>
         {nav.map(([label, href]) => <a key={label} href={href} onClick={() => setMenuOpen(false)}>{label}<ArrowUpRight size={17} aria-hidden="true" /></a>)}
-        <button className="mobile-theme" type="button" onClick={toggleTheme}>{activeTheme === 'dark' ? <Sun size={16} aria-hidden="true" /> : <Moon size={16} aria-hidden="true" />}Ganti ke mode {activeTheme === 'dark' ? 'terang' : 'gelap'}</button>
       </nav>
       <main id="konten">
       <section className="hero" id="beranda" aria-labelledby="hero-title">
